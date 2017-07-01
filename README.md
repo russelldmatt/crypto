@@ -929,7 +929,7 @@ $ ./crypto.py how-can-you-make 1 --with 1548
 (8 / 5) ^ 4 ^ 1 = 1
 </pre>
 
-There are also other interesting commands:
+There are some other commands too:
 
 <pre>
 $ ./crypto.py --help
