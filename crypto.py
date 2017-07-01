@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-allow_concat_as_normal_operation = True
+allow_concat_as_normal_operation = False
 
 import sys
 import unittest
