@@ -22,7 +22,9 @@ out.. there are quite a few:
 
 $ ./crypto.py how-can-you-make 1 --with 1548
 1 + 4 * 5 / 8 = 1
+
 1 + 4 / 5 * 8 = 1
+
 1 + 4 / 8 * 5 = 1
 1 + 4 / (5 + 8) = 1
 1 + 4 / (5 * 8) = 1
