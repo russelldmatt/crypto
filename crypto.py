@@ -126,6 +126,7 @@ def all_non_empty_partitions_where_left_is_smaller(l):
             
 def checked_pow(a, b):
     if a == 0: return 0
+    if a < 0 and not float(b).is_integer(): return None
     if b * log(abs(a)) > 100: return float('inf')
     else: return pow(a, b)
 
@@ -139,7 +140,7 @@ def concat(a, b):
 addition       = Operator(lambda a, b: a + b, ' + ',                                      precedence = Precedence.Addition, is_concat = False, is_commutative = True,  is_associative = True)
 subtraction    = Operator(lambda a, b: a - b, ' - ',                                      precedence = Precedence.Subtraction, is_concat = False, is_commutative = False, is_associative = False)
 multiplication = Operator(lambda a, b: a * b, ' * ',                                      precedence = Precedence.Multiplication, is_concat = False, is_commutative = True,  is_associative = True)
-division       = Operator(lambda a, b: None if b == 0 else a / b, ' / ',                  precedence = Precedence.Division, is_concat = False, is_commutative = False, is_associative = False)
+division       = Operator(lambda a, b: None if b == 0 else a / float(b), ' / ',                  precedence = Precedence.Division, is_concat = False, is_commutative = False, is_associative = False)
 exponentiation = Operator(checked_pow, ' ^ ',                                             precedence = Precedence.Exponentiation, is_concat = False, is_commutative = False, is_associative = False)
 concatenation  = Operator(concat, ' concat ' if allow_concat_as_normal_operation else '', precedence = Precedence.Concatenation, is_concat = True,  is_commutative = False, is_associative = True)
 all_operators = [ addition, subtraction, multiplication, division, exponentiation, concatenation ]
@@ -293,11 +294,11 @@ def all_expressions_command(args):
     operators = parse_only_operators(args)
     for expr in all_expressions(numbers, operators):
         x = expr.eval()
-        if x:
-            print "{} = {}".format(expr, x)
+        if x and float(x).is_integer():
+            print "{} = {}".format(expr, int(x))
 
 def all_valid_evaluated_expressions(numbers, operators):
-    return [ x for x in [ expr.eval() for expr in all_expressions(numbers, operators) ] if x > 0 and float(x).is_integer() ]
+    return [ int(x) for x in [ expr.eval() for expr in all_expressions(numbers, operators) ] if x > 0 and float(x).is_integer() ]
         
 def numbers_you_can_make_command(args):
     numbers = [ int(x) for x in args.N ]
@@ -317,8 +318,10 @@ def how_can_you_make_command(args):
     N = getattr(args, 'with')
     operators = parse_only_operators(args)
     numbers = [ int(x) for x in N ]
-    for expr in [ expr for expr in all_expressions(numbers, operators) if expr.eval() == target ]:
-        print "{} = {}".format(expr, expr.eval())
+    for expr in all_expressions(numbers, operators):
+        x = expr.eval()
+        if x == target:
+            print "{} = {}".format(expr, int(x))
         
 if __name__ == '__main__':
     import argparse
