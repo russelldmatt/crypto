@@ -15,7 +15,7 @@ How about... 1 * (5 + 4 - 8)
 
 Great, now try 2.
 
-./cryto.py is a python program that helps solve this game.
+`./crypto.py` is a program that helps solve this game.
 
 For example, what are *all* the ways you make 1 with 1548?  Turns
 out.. there are quite a few:
