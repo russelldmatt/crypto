@@ -242,6 +242,7 @@ class Tests(unittest.TestCase):
                           '1 + 4 + 2 + 3 = 10',
                           '1 + 3 + 4 + 2 = 10',
                           '1 + 4 + 3 + 2 = 10'])
+
         
     def test_all_expressions_with_only_concat(self):
         self.maxDiff = None
